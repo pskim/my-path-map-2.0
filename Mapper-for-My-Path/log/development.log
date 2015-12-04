@@ -2013,3 +2013,402 @@ ActiveRecord::SubclassNotFound (Invalid single-table inheritance type: fart is n
   Rendered /Users/d0ntg0m0ng/.rvm/gems/ruby-2.2.2/gems/web-console-2.2.1/lib/web_console/templates/main.js.erb within layouts/javascript (0.4ms)
   Rendered /Users/d0ntg0m0ng/.rvm/gems/ruby-2.2.2/gems/web-console-2.2.1/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.4ms)
   Rendered /Users/d0ntg0m0ng/.rvm/gems/ruby-2.2.2/gems/web-console-2.2.1/lib/web_console/templates/index.html.erb (105.8ms)
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Migrating to RemoveTypeFromInstitutions (20151204221755)
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36m (0.5ms)[0m  [1mCREATE TEMPORARY TABLE "ainstitutions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "address" varchar, "name" varchar, "type" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (0.1ms)[0m  SELECT * FROM "institutions"
+  [1m[36m (0.1ms)[0m  [1mINSERT INTO "ainstitutions" ("id","address","name","type","created_at","updated_at") VALUES (1, 'sdfsdf', 'sdfdsf', '', '2015-12-04 21:55:17.841403', '2015-12-04 21:55:17.841403')[0m
+  [1m[35m (0.3ms)[0m  DROP TABLE "institutions"
+  [1m[36m (0.1ms)[0m  [1mCREATE TABLE "institutions" ("id" INTEGER PRIMARY KEY AUTOINCREMENT NOT NULL, "address" varchar, "name" varchar, "created_at" datetime NOT NULL, "updated_at" datetime NOT NULL) [0m
+  [1m[35m (0.2ms)[0m  SELECT * FROM "ainstitutions"
+  [1m[36m (0.0ms)[0m  [1mINSERT INTO "institutions" ("id","address","name","created_at","updated_at") VALUES (1, 'sdfsdf', 'sdfdsf', '2015-12-04 21:55:17.841403', '2015-12-04 21:55:17.841403')[0m
+  [1m[35m (0.3ms)[0m  DROP TABLE "ainstitutions"
+  [1m[36mSQL (0.5ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20151204221755"]]
+  [1m[35m (1.7ms)[0m  commit transaction
+Migrating to AddClassificationToInstitutions (20151204222610)
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35m (0.3ms)[0m  ALTER TABLE "institutions" ADD "classification" varchar
+  [1m[36mSQL (0.1ms)[0m  [1mINSERT INTO "schema_migrations" ("version") VALUES (?)[0m  [["version", "20151204222610"]]
+  [1m[35m (1.4ms)[0m  commit transaction
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+
+
+Started GET "/institutions" for ::1 at 2015-12-04 14:27:32 -0800
+  [1m[36mActiveRecord::SchemaMigration Load (0.1ms)[0m  [1mSELECT "schema_migrations".* FROM "schema_migrations"[0m
+Processing by InstitutionsController#index as HTML
+  [1m[35mInstitution Load (0.2ms)[0m  SELECT "institutions".* FROM "institutions"
+  Rendered institutions/index.html.erb within layouts/application (15.0ms)
+Completed 500 Internal Server Error in 40ms (ActiveRecord: 0.6ms)
+
+ActionView::Template::Error (undefined method `type' for #<Institution:0x007faf280a8370>):
+    17:       <tr>
+    18:         <td><%= institution.address %></td>
+    19:         <td><%= institution.name %></td>
+    20:         <td><%= institution.type %></td>
+    21:         <td><%= link_to 'Show', institution %></td>
+    22:         <td><%= link_to 'Edit', edit_institution_path(institution) %></td>
+    23:         <td><%= link_to 'Destroy', institution, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  app/views/institutions/index.html.erb:20:in `block in _app_views_institutions_index_html_erb__2939568151984660334_70195130404460'
+  app/views/institutions/index.html.erb:16:in `_app_views_institutions_index_html_erb__2939568151984660334_70195130404460'
+
+
+  Rendered /Users/d0ntg0m0ng/.rvm/gems/ruby-2.2.2/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/rescues/_source.erb (5.9ms)
+  Rendered /Users/d0ntg0m0ng/.rvm/gems/ruby-2.2.2/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.3ms)
+  Rendered /Users/d0ntg0m0ng/.rvm/gems/ruby-2.2.2/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.8ms)
+  Rendered /Users/d0ntg0m0ng/.rvm/gems/ruby-2.2.2/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (56.5ms)
+  Rendered /Users/d0ntg0m0ng/.rvm/gems/ruby-2.2.2/gems/web-console-2.2.1/lib/web_console/templates/_markup.html.erb (0.3ms)
+  Rendered /Users/d0ntg0m0ng/.rvm/gems/ruby-2.2.2/gems/web-console-2.2.1/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/d0ntg0m0ng/.rvm/gems/ruby-2.2.2/gems/web-console-2.2.1/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/d0ntg0m0ng/.rvm/gems/ruby-2.2.2/gems/web-console-2.2.1/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/d0ntg0m0ng/.rvm/gems/ruby-2.2.2/gems/web-console-2.2.1/lib/web_console/templates/console.js.erb within layouts/javascript (46.1ms)
+  Rendered /Users/d0ntg0m0ng/.rvm/gems/ruby-2.2.2/gems/web-console-2.2.1/lib/web_console/templates/main.js.erb within layouts/javascript (0.3ms)
+  Rendered /Users/d0ntg0m0ng/.rvm/gems/ruby-2.2.2/gems/web-console-2.2.1/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.4ms)
+  Rendered /Users/d0ntg0m0ng/.rvm/gems/ruby-2.2.2/gems/web-console-2.2.1/lib/web_console/templates/index.html.erb (106.8ms)
+
+
+Started GET "/" for ::1 at 2015-12-04 14:27:41 -0800
+Processing by WelcomeController#index as HTML
+  Rendered welcome/index.html.erb within layouts/application (0.6ms)
+Completed 200 OK in 213ms (Views: 212.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/new" for ::1 at 2015-12-04 14:27:43 -0800
+Processing by UsersController#new as HTML
+  Rendered users/_form.html.erb (32.1ms)
+  Rendered users/new.html.erb within layouts/application (35.4ms)
+Completed 200 OK in 100ms (Views: 92.9ms | ActiveRecord: 0.3ms)
+
+
+Started GET "/institutions" for ::1 at 2015-12-04 14:27:51 -0800
+Processing by InstitutionsController#index as HTML
+  [1m[36mInstitution Load (0.2ms)[0m  [1mSELECT "institutions".* FROM "institutions"[0m
+  Rendered institutions/index.html.erb within layouts/application (3.3ms)
+Completed 500 Internal Server Error in 8ms (ActiveRecord: 0.2ms)
+
+ActionView::Template::Error (undefined method `type' for #<Institution:0x007faf2862f280>):
+    17:       <tr>
+    18:         <td><%= institution.address %></td>
+    19:         <td><%= institution.name %></td>
+    20:         <td><%= institution.type %></td>
+    21:         <td><%= link_to 'Show', institution %></td>
+    22:         <td><%= link_to 'Edit', edit_institution_path(institution) %></td>
+    23:         <td><%= link_to 'Destroy', institution, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  app/views/institutions/index.html.erb:20:in `block in _app_views_institutions_index_html_erb__2939568151984660334_70195130404460'
+  app/views/institutions/index.html.erb:16:in `_app_views_institutions_index_html_erb__2939568151984660334_70195130404460'
+
+
+  Rendered /Users/d0ntg0m0ng/.rvm/gems/ruby-2.2.2/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/rescues/_source.erb (7.3ms)
+  Rendered /Users/d0ntg0m0ng/.rvm/gems/ruby-2.2.2/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.4ms)
+  Rendered /Users/d0ntg0m0ng/.rvm/gems/ruby-2.2.2/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (1.0ms)
+  Rendered /Users/d0ntg0m0ng/.rvm/gems/ruby-2.2.2/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (52.0ms)
+  Rendered /Users/d0ntg0m0ng/.rvm/gems/ruby-2.2.2/gems/web-console-2.2.1/lib/web_console/templates/_markup.html.erb (0.3ms)
+  Rendered /Users/d0ntg0m0ng/.rvm/gems/ruby-2.2.2/gems/web-console-2.2.1/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.2ms)
+  Rendered /Users/d0ntg0m0ng/.rvm/gems/ruby-2.2.2/gems/web-console-2.2.1/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/d0ntg0m0ng/.rvm/gems/ruby-2.2.2/gems/web-console-2.2.1/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/d0ntg0m0ng/.rvm/gems/ruby-2.2.2/gems/web-console-2.2.1/lib/web_console/templates/console.js.erb within layouts/javascript (38.5ms)
+  Rendered /Users/d0ntg0m0ng/.rvm/gems/ruby-2.2.2/gems/web-console-2.2.1/lib/web_console/templates/main.js.erb within layouts/javascript (0.3ms)
+  Rendered /Users/d0ntg0m0ng/.rvm/gems/ruby-2.2.2/gems/web-console-2.2.1/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.4ms)
+  Rendered /Users/d0ntg0m0ng/.rvm/gems/ruby-2.2.2/gems/web-console-2.2.1/lib/web_console/templates/index.html.erb (84.3ms)
+
+
+Started GET "/institutions" for ::1 at 2015-12-04 14:28:06 -0800
+Processing by InstitutionsController#index as HTML
+  [1m[35mInstitution Load (0.1ms)[0m  SELECT "institutions".* FROM "institutions"
+  Rendered institutions/index.html.erb within layouts/application (3.2ms)
+Completed 500 Internal Server Error in 7ms (ActiveRecord: 0.1ms)
+
+ActionView::Template::Error (undefined method `type' for #<Institution:0x007faf25b3d568>):
+    17:       <tr>
+    18:         <td><%= institution.address %></td>
+    19:         <td><%= institution.name %></td>
+    20:         <td><%= institution.type %></td>
+    21:         <td><%= link_to 'Show', institution %></td>
+    22:         <td><%= link_to 'Edit', edit_institution_path(institution) %></td>
+    23:         <td><%= link_to 'Destroy', institution, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+  app/views/institutions/index.html.erb:20:in `block in _app_views_institutions_index_html_erb__2939568151984660334_70195130404460'
+  app/views/institutions/index.html.erb:16:in `_app_views_institutions_index_html_erb__2939568151984660334_70195130404460'
+
+
+  Rendered /Users/d0ntg0m0ng/.rvm/gems/ruby-2.2.2/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/rescues/_source.erb (6.6ms)
+  Rendered /Users/d0ntg0m0ng/.rvm/gems/ruby-2.2.2/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.5ms)
+  Rendered /Users/d0ntg0m0ng/.rvm/gems/ruby-2.2.2/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.8ms)
+  Rendered /Users/d0ntg0m0ng/.rvm/gems/ruby-2.2.2/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/rescues/template_error.html.erb within rescues/layout (48.6ms)
+  Rendered /Users/d0ntg0m0ng/.rvm/gems/ruby-2.2.2/gems/web-console-2.2.1/lib/web_console/templates/_markup.html.erb (0.3ms)
+  Rendered /Users/d0ntg0m0ng/.rvm/gems/ruby-2.2.2/gems/web-console-2.2.1/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/d0ntg0m0ng/.rvm/gems/ruby-2.2.2/gems/web-console-2.2.1/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/d0ntg0m0ng/.rvm/gems/ruby-2.2.2/gems/web-console-2.2.1/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/d0ntg0m0ng/.rvm/gems/ruby-2.2.2/gems/web-console-2.2.1/lib/web_console/templates/console.js.erb within layouts/javascript (42.3ms)
+  Rendered /Users/d0ntg0m0ng/.rvm/gems/ruby-2.2.2/gems/web-console-2.2.1/lib/web_console/templates/main.js.erb within layouts/javascript (0.4ms)
+  Rendered /Users/d0ntg0m0ng/.rvm/gems/ruby-2.2.2/gems/web-console-2.2.1/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.3ms)
+  Rendered /Users/d0ntg0m0ng/.rvm/gems/ruby-2.2.2/gems/web-console-2.2.1/lib/web_console/templates/index.html.erb (91.1ms)
+
+
+Started GET "/institutions" for ::1 at 2015-12-04 14:31:18 -0800
+Processing by InstitutionsController#index as HTML
+  [1m[36mInstitution Load (0.3ms)[0m  [1mSELECT "institutions".* FROM "institutions"[0m
+  Rendered institutions/index.html.erb within layouts/application (7.3ms)
+Completed 200 OK in 59ms (Views: 55.9ms | ActiveRecord: 0.7ms)
+
+
+Started GET "/assets/institutions.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2015-12-04 14:31:18 -0800
+
+
+Started GET "/assets/application.self-e80e8f2318043e8af94dddc2adad5a4f09739a8ebb323b3ab31cd71d45fd9113.css?body=1" for ::1 at 2015-12-04 14:31:19 -0800
+
+
+Started GET "/assets/jquery_ujs.self-d456baa54c1fa6be2ec3711f0a72ddf7a5b2f34a6b4f515f33767d6207b7d4b3.js?body=1" for ::1 at 2015-12-04 14:31:19 -0800
+
+
+Started GET "/assets/scaffolds.self-19c678f5a64a20a4719ab62074abcdda05b8740c9fac324de851bf83f2cacc73.css?body=1" for ::1 at 2015-12-04 14:31:19 -0800
+
+
+Started GET "/assets/users.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2015-12-04 14:31:19 -0800
+
+
+Started GET "/assets/jquery.self-a714331225dda820228db323939889f149aec0127aeb06255646b616ba1ca419.js?body=1" for ::1 at 2015-12-04 14:31:19 -0800
+
+
+Started GET "/assets/welcome.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2015-12-04 14:31:19 -0800
+
+
+Started GET "/assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8bd9a65309e9c5abe2cbfff.js?body=1" for ::1 at 2015-12-04 14:31:19 -0800
+
+
+Started GET "/assets/institutions.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-12-04 14:31:19 -0800
+
+
+Started GET "/assets/users.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-12-04 14:31:19 -0800
+
+
+Started GET "/assets/welcome.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-12-04 14:31:19 -0800
+
+
+Started GET "/assets/application.self-3b8dabdc891efe46b9a144b400ad69e37d7e5876bdc39dee783419a69d7ca819.js?body=1" for ::1 at 2015-12-04 14:31:19 -0800
+
+
+Started GET "/institutions" for ::1 at 2015-12-04 14:31:23 -0800
+Processing by InstitutionsController#index as HTML
+  [1m[35mInstitution Load (0.1ms)[0m  SELECT "institutions".* FROM "institutions"
+  Rendered institutions/index.html.erb within layouts/application (1.2ms)
+Completed 200 OK in 41ms (Views: 40.5ms | ActiveRecord: 0.1ms)
+
+
+Started GET "/institutions/new" for ::1 at 2015-12-04 14:31:25 -0800
+Processing by InstitutionsController#new as HTML
+  Rendered institutions/_form.html.erb (3.1ms)
+  Rendered institutions/new.html.erb within layouts/application (5.4ms)
+Completed 200 OK in 45ms (Views: 44.8ms | ActiveRecord: 0.0ms)
+
+
+Started POST "/institutions" for ::1 at 2015-12-04 14:31:29 -0800
+Processing by InstitutionsController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"Fy9s2OQUvfj+3jxzuCZEKGDNON353UFj3zr1bM1f3Wje7iWUwxHkWsavmnfrLVDRxVEaZwy7Dqn61Q6JIo3G7w==", "institution"=>{"address"=>"dasds", "name"=>"asds", "classification"=>"asdsd"}, "commit"=>"Create Institution"}
+  [1m[36m (0.1ms)[0m  [1mbegin transaction[0m
+  [1m[35mSQL (0.4ms)[0m  INSERT INTO "institutions" ("address", "name", "classification", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)  [["address", "dasds"], ["name", "asds"], ["classification", "asdsd"], ["created_at", "2015-12-04 22:31:29.230033"], ["updated_at", "2015-12-04 22:31:29.230033"]]
+  [1m[36m (2.0ms)[0m  [1mcommit transaction[0m
+Redirected to http://localhost:3000/institutions/2
+Completed 302 Found in 9ms (ActiveRecord: 2.5ms)
+
+
+Started GET "/institutions/2" for ::1 at 2015-12-04 14:31:29 -0800
+Processing by InstitutionsController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[35mInstitution Load (0.2ms)[0m  SELECT  "institutions".* FROM "institutions" WHERE "institutions"."id" = ? LIMIT 1  [["id", 2]]
+  Rendered institutions/show.html.erb within layouts/application (0.8ms)
+Completed 200 OK in 49ms (Views: 38.5ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/institutions" for ::1 at 2015-12-04 14:31:32 -0800
+Processing by InstitutionsController#index as HTML
+  [1m[36mInstitution Load (0.2ms)[0m  [1mSELECT "institutions".* FROM "institutions"[0m
+  Rendered institutions/index.html.erb within layouts/application (2.0ms)
+Completed 200 OK in 40ms (Views: 39.6ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/" for ::1 at 2015-12-04 15:26:00 -0800
+Processing by WelcomeController#index as HTML
+  Rendered welcome/index.html.erb within layouts/application (0.3ms)
+Completed 200 OK in 62ms (Views: 61.1ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/users/new" for ::1 at 2015-12-04 15:27:02 -0800
+Processing by UsersController#new as HTML
+  Rendered users/_form.html.erb (2.3ms)
+  Rendered users/new.html.erb within layouts/application (4.2ms)
+Completed 200 OK in 53ms (Views: 47.8ms | ActiveRecord: 0.2ms)
+
+
+Started POST "/users" for ::1 at 2015-12-04 15:27:08 -0800
+Processing by UsersController#create as HTML
+  Parameters: {"utf8"=>"✓", "authenticity_token"=>"RVAUL6zCiupz3YVp7oiEX4qi2hWO3tq+LIUm8NJxDreMkV1ji8fTSEusI229g5CmLz74r3u4lXQJat0VPaMVMA==", "user"=>{"email"=>"pdfef", "password"=>"[FILTERED]", "admin"=>"1"}, "commit"=>"Create User"}
+  [1m[35m (0.1ms)[0m  begin transaction
+  [1m[36mSQL (0.3ms)[0m  [1mINSERT INTO "users" ("email", "password", "admin", "created_at", "updated_at") VALUES (?, ?, ?, ?, ?)[0m  [["email", "pdfef"], ["password", "dsf"], ["admin", "t"], ["created_at", "2015-12-04 23:27:08.883625"], ["updated_at", "2015-12-04 23:27:08.883625"]]
+  [1m[35m (2.1ms)[0m  commit transaction
+Redirected to http://localhost:3000/users/2
+Completed 302 Found in 7ms (ActiveRecord: 2.5ms)
+
+
+Started GET "/users/2" for ::1 at 2015-12-04 15:27:08 -0800
+Processing by UsersController#show as HTML
+  Parameters: {"id"=>"2"}
+  [1m[36mUser Load (0.2ms)[0m  [1mSELECT  "users".* FROM "users" WHERE "users"."id" = ? LIMIT 1[0m  [["id", 2]]
+  Rendered users/show.html.erb within layouts/application (0.8ms)
+Completed 200 OK in 45ms (Views: 43.4ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/users" for ::1 at 2015-12-04 15:27:11 -0800
+Processing by UsersController#index as HTML
+  [1m[35mUser Load (0.2ms)[0m  SELECT "users".* FROM "users"
+  Rendered users/index.html.erb within layouts/application (2.2ms)
+Completed 200 OK in 60ms (Views: 58.9ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/" for ::1 at 2015-12-04 15:27:46 -0800
+Processing by WelcomeController#index as HTML
+  Rendered welcome/index.html.erb within layouts/application (1.6ms)
+Completed 500 Internal Server Error in 10ms (ActiveRecord: 0.0ms)
+
+SyntaxError (/Users/d0ntg0m0ng/Desktop/my-path-map2.0/my-path-map-2.0/Mapper-for-My-Path/app/views/welcome/index.html.erb:5: syntax error, unexpected ')'
+...r.append=( link_to 'sign in', );@output_buffer.safe_append='
+...                               ^
+/Users/d0ntg0m0ng/Desktop/my-path-map2.0/my-path-map-2.0/Mapper-for-My-Path/app/views/welcome/index.html.erb:7: syntax error, unexpected keyword_ensure, expecting ')'
+/Users/d0ntg0m0ng/Desktop/my-path-map2.0/my-path-map-2.0/Mapper-for-My-Path/app/views/welcome/index.html.erb:9: syntax error, unexpected keyword_end, expecting ')'):
+  app/views/welcome/index.html.erb:5: syntax error, unexpected ')'
+  app/views/welcome/index.html.erb:7: syntax error, unexpected keyword_ensure, expecting ')'
+  app/views/welcome/index.html.erb:9: syntax error, unexpected keyword_end, expecting ')'
+
+
+  Rendered /Users/d0ntg0m0ng/.rvm/gems/ruby-2.2.2/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/rescues/_source.erb (5.8ms)
+  Rendered /Users/d0ntg0m0ng/.rvm/gems/ruby-2.2.2/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.5ms)
+  Rendered /Users/d0ntg0m0ng/.rvm/gems/ruby-2.2.2/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.9ms)
+  Rendered /Users/d0ntg0m0ng/.rvm/gems/ruby-2.2.2/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (54.1ms)
+  Rendered /Users/d0ntg0m0ng/.rvm/gems/ruby-2.2.2/gems/web-console-2.2.1/lib/web_console/templates/_markup.html.erb (0.6ms)
+  Rendered /Users/d0ntg0m0ng/.rvm/gems/ruby-2.2.2/gems/web-console-2.2.1/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/d0ntg0m0ng/.rvm/gems/ruby-2.2.2/gems/web-console-2.2.1/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/d0ntg0m0ng/.rvm/gems/ruby-2.2.2/gems/web-console-2.2.1/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/d0ntg0m0ng/.rvm/gems/ruby-2.2.2/gems/web-console-2.2.1/lib/web_console/templates/console.js.erb within layouts/javascript (47.4ms)
+  Rendered /Users/d0ntg0m0ng/.rvm/gems/ruby-2.2.2/gems/web-console-2.2.1/lib/web_console/templates/main.js.erb within layouts/javascript (0.3ms)
+  Rendered /Users/d0ntg0m0ng/.rvm/gems/ruby-2.2.2/gems/web-console-2.2.1/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.4ms)
+  Rendered /Users/d0ntg0m0ng/.rvm/gems/ruby-2.2.2/gems/web-console-2.2.1/lib/web_console/templates/index.html.erb (103.6ms)
+
+
+Started GET "/" for ::1 at 2015-12-04 15:27:47 -0800
+Processing by WelcomeController#index as HTML
+  Rendered welcome/index.html.erb within layouts/application (1.3ms)
+Completed 500 Internal Server Error in 5ms (ActiveRecord: 0.0ms)
+
+SyntaxError (/Users/d0ntg0m0ng/Desktop/my-path-map2.0/my-path-map-2.0/Mapper-for-My-Path/app/views/welcome/index.html.erb:5: syntax error, unexpected ')'
+...r.append=( link_to 'sign in', );@output_buffer.safe_append='
+...                               ^
+/Users/d0ntg0m0ng/Desktop/my-path-map2.0/my-path-map-2.0/Mapper-for-My-Path/app/views/welcome/index.html.erb:7: syntax error, unexpected keyword_ensure, expecting ')'
+/Users/d0ntg0m0ng/Desktop/my-path-map2.0/my-path-map-2.0/Mapper-for-My-Path/app/views/welcome/index.html.erb:9: syntax error, unexpected keyword_end, expecting ')'):
+  app/views/welcome/index.html.erb:5: syntax error, unexpected ')'
+  app/views/welcome/index.html.erb:7: syntax error, unexpected keyword_ensure, expecting ')'
+  app/views/welcome/index.html.erb:9: syntax error, unexpected keyword_end, expecting ')'
+
+
+  Rendered /Users/d0ntg0m0ng/.rvm/gems/ruby-2.2.2/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/rescues/_source.erb (6.3ms)
+  Rendered /Users/d0ntg0m0ng/.rvm/gems/ruby-2.2.2/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.7ms)
+  Rendered /Users/d0ntg0m0ng/.rvm/gems/ruby-2.2.2/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.9ms)
+  Rendered /Users/d0ntg0m0ng/.rvm/gems/ruby-2.2.2/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (53.0ms)
+  Rendered /Users/d0ntg0m0ng/.rvm/gems/ruby-2.2.2/gems/web-console-2.2.1/lib/web_console/templates/_markup.html.erb (0.4ms)
+  Rendered /Users/d0ntg0m0ng/.rvm/gems/ruby-2.2.2/gems/web-console-2.2.1/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/d0ntg0m0ng/.rvm/gems/ruby-2.2.2/gems/web-console-2.2.1/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/d0ntg0m0ng/.rvm/gems/ruby-2.2.2/gems/web-console-2.2.1/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/d0ntg0m0ng/.rvm/gems/ruby-2.2.2/gems/web-console-2.2.1/lib/web_console/templates/console.js.erb within layouts/javascript (40.0ms)
+  Rendered /Users/d0ntg0m0ng/.rvm/gems/ruby-2.2.2/gems/web-console-2.2.1/lib/web_console/templates/main.js.erb within layouts/javascript (0.3ms)
+  Rendered /Users/d0ntg0m0ng/.rvm/gems/ruby-2.2.2/gems/web-console-2.2.1/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.4ms)
+  Rendered /Users/d0ntg0m0ng/.rvm/gems/ruby-2.2.2/gems/web-console-2.2.1/lib/web_console/templates/index.html.erb (87.8ms)
+
+
+Started GET "/" for ::1 at 2015-12-04 15:27:48 -0800
+Processing by WelcomeController#index as HTML
+  Rendered welcome/index.html.erb within layouts/application (1.2ms)
+Completed 500 Internal Server Error in 7ms (ActiveRecord: 0.0ms)
+
+SyntaxError (/Users/d0ntg0m0ng/Desktop/my-path-map2.0/my-path-map-2.0/Mapper-for-My-Path/app/views/welcome/index.html.erb:5: syntax error, unexpected ')'
+...r.append=( link_to 'sign in', );@output_buffer.safe_append='
+...                               ^
+/Users/d0ntg0m0ng/Desktop/my-path-map2.0/my-path-map-2.0/Mapper-for-My-Path/app/views/welcome/index.html.erb:7: syntax error, unexpected keyword_ensure, expecting ')'
+/Users/d0ntg0m0ng/Desktop/my-path-map2.0/my-path-map-2.0/Mapper-for-My-Path/app/views/welcome/index.html.erb:9: syntax error, unexpected keyword_end, expecting ')'):
+  app/views/welcome/index.html.erb:5: syntax error, unexpected ')'
+  app/views/welcome/index.html.erb:7: syntax error, unexpected keyword_ensure, expecting ')'
+  app/views/welcome/index.html.erb:9: syntax error, unexpected keyword_end, expecting ')'
+
+
+  Rendered /Users/d0ntg0m0ng/.rvm/gems/ruby-2.2.2/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/rescues/_source.erb (6.5ms)
+  Rendered /Users/d0ntg0m0ng/.rvm/gems/ruby-2.2.2/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/rescues/_trace.html.erb (2.9ms)
+  Rendered /Users/d0ntg0m0ng/.rvm/gems/ruby-2.2.2/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/rescues/_request_and_response.html.erb (0.9ms)
+  Rendered /Users/d0ntg0m0ng/.rvm/gems/ruby-2.2.2/gems/actionpack-4.2.4/lib/action_dispatch/middleware/templates/rescues/diagnostics.html.erb within rescues/layout (61.6ms)
+  Rendered /Users/d0ntg0m0ng/.rvm/gems/ruby-2.2.2/gems/web-console-2.2.1/lib/web_console/templates/_markup.html.erb (0.8ms)
+  Rendered /Users/d0ntg0m0ng/.rvm/gems/ruby-2.2.2/gems/web-console-2.2.1/lib/web_console/templates/_inner_console_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/d0ntg0m0ng/.rvm/gems/ruby-2.2.2/gems/web-console-2.2.1/lib/web_console/templates/_prompt_box_markup.html.erb within layouts/inlined_string (0.3ms)
+  Rendered /Users/d0ntg0m0ng/.rvm/gems/ruby-2.2.2/gems/web-console-2.2.1/lib/web_console/templates/style.css.erb within layouts/inlined_string (0.4ms)
+  Rendered /Users/d0ntg0m0ng/.rvm/gems/ruby-2.2.2/gems/web-console-2.2.1/lib/web_console/templates/console.js.erb within layouts/javascript (51.2ms)
+  Rendered /Users/d0ntg0m0ng/.rvm/gems/ruby-2.2.2/gems/web-console-2.2.1/lib/web_console/templates/main.js.erb within layouts/javascript (0.5ms)
+  Rendered /Users/d0ntg0m0ng/.rvm/gems/ruby-2.2.2/gems/web-console-2.2.1/lib/web_console/templates/error_page.js.erb within layouts/javascript (0.5ms)
+  Rendered /Users/d0ntg0m0ng/.rvm/gems/ruby-2.2.2/gems/web-console-2.2.1/lib/web_console/templates/index.html.erb (115.1ms)
+
+
+Started GET "/" for ::1 at 2015-12-04 15:29:24 -0800
+Processing by WelcomeController#index as HTML
+  Rendered welcome/index.html.erb within layouts/application (0.6ms)
+Completed 200 OK in 43ms (Views: 41.9ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/assets/users.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2015-12-04 15:29:25 -0800
+
+
+Started GET "/assets/jquery.self-a714331225dda820228db323939889f149aec0127aeb06255646b616ba1ca419.js?body=1" for ::1 at 2015-12-04 15:29:25 -0800
+
+
+Started GET "/assets/scaffolds.self-19c678f5a64a20a4719ab62074abcdda05b8740c9fac324de851bf83f2cacc73.css?body=1" for ::1 at 2015-12-04 15:29:25 -0800
+
+
+Started GET "/assets/institutions.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2015-12-04 15:29:25 -0800
+
+
+Started GET "/assets/jquery_ujs.self-d456baa54c1fa6be2ec3711f0a72ddf7a5b2f34a6b4f515f33767d6207b7d4b3.js?body=1" for ::1 at 2015-12-04 15:29:25 -0800
+
+
+Started GET "/assets/turbolinks.self-c37727e9bd6b2735da5c311aa83fead54ed0be6cc8bd9a65309e9c5abe2cbfff.js?body=1" for ::1 at 2015-12-04 15:29:25 -0800
+
+
+Started GET "/assets/application.self-e80e8f2318043e8af94dddc2adad5a4f09739a8ebb323b3ab31cd71d45fd9113.css?body=1" for ::1 at 2015-12-04 15:29:25 -0800
+
+
+Started GET "/assets/welcome.self-e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css?body=1" for ::1 at 2015-12-04 15:29:25 -0800
+
+
+Started GET "/assets/institutions.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-12-04 15:29:25 -0800
+
+
+Started GET "/assets/users.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-12-04 15:29:25 -0800
+
+
+Started GET "/assets/welcome.self-877aef30ae1b040ab8a3aba4e3e309a11d7f2612f44dde450b5c157aa5f95c05.js?body=1" for ::1 at 2015-12-04 15:29:25 -0800
+
+
+Started GET "/assets/application.self-3b8dabdc891efe46b9a144b400ad69e37d7e5876bdc39dee783419a69d7ca819.js?body=1" for ::1 at 2015-12-04 15:29:25 -0800
+
+
+Started GET "/institutions" for ::1 at 2015-12-04 15:29:26 -0800
+Processing by InstitutionsController#index as HTML
+  [1m[36mInstitution Load (0.2ms)[0m  [1mSELECT "institutions".* FROM "institutions"[0m
+  Rendered institutions/index.html.erb within layouts/application (2.1ms)
+Completed 200 OK in 62ms (Views: 61.0ms | ActiveRecord: 0.2ms)
+
+
+Started GET "/institutions/new" for ::1 at 2015-12-04 15:29:29 -0800
+Processing by InstitutionsController#new as HTML
+  Rendered institutions/_form.html.erb (2.9ms)
+  Rendered institutions/new.html.erb within layouts/application (6.2ms)
+Completed 200 OK in 66ms (Views: 65.5ms | ActiveRecord: 0.0ms)
+
+
+Started GET "/institutions" for ::1 at 2015-12-04 15:29:30 -0800
+Processing by InstitutionsController#index as HTML
+  [1m[35mInstitution Load (0.2ms)[0m  SELECT "institutions".* FROM "institutions"
+  Rendered institutions/index.html.erb within layouts/application (2.2ms)
+Completed 200 OK in 59ms (Views: 58.4ms | ActiveRecord: 0.2ms)
