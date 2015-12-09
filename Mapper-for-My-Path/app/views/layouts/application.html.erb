@@ -2,14 +2,27 @@
 <html>
 <head>
   <title>MapperForMyPath</title>
-  
+
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
 </head>
 <body>
+<!-- navbar -->
+  <%= nav_bar fixed: :top, brand: "My Path Mapper", responsive: true do %>
+      <%= menu_group do %>
+          <%= menu_item "Home", root_path %>
+          <%= menu_divider %>
+          <%= menu_item "Financial Institutions", institutions_path %>
+          <%= menu_item "Sign in" %>
+          <%= menu_item "Sign up", new_user_path %>
 
-<%= yield %>
+      <% end %>
+  <% end %>
+
+  <section id="body-of-page">
+    <%= yield %>
+  </section>
 
 </body>
 </html>
